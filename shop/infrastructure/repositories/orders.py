@@ -7,4 +7,7 @@ class ImplOrdersRepository(OrdersRepository):
         pass
     
     
-# encje produktu, repozytorium produktu, zaimplementuj serwij i zaprojektuj baze danych (w paincie)
+# encje produktu, 
+# repozytorium produktu, 
+# zaimplementuj serwis
+# zaprojektuj baze danych (w paincie)
