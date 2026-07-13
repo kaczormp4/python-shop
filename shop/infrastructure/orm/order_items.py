@@ -1,9 +1,10 @@
-from base import Base
 import uuid
 
 from sqlalchemy import CheckConstraint, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from shop.infrastructure.orm.base import Base
 
 
 class OrderItemModel(Base):

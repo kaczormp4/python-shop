@@ -6,5 +6,18 @@
 
 2 - 13.07
 # rozwiazac problemu z alembikiem
+## alembic heads
+## alembic upgrade head
+## alembic current
+## rm migrations/versions/7a6f8e736553_initial_revision.py
+## psql -d shopApp
+## DROP TABLE IF EXISTS alembic_version;
+## alembic revision --autogenerate -m "initial_revision"
+## from base import Base -> from shop.infrastructure.orm.base import Base
+## alembic revision --autogenerate -m "initial_revision"
+## alembic upgrade head
+## alembic current
+
+
 # stworz obsloge sessji bazy danych poprzez context manager, uzyj "unity of work"
 # repozytoria do napisania shop/infrastructure/repositories - kod ktory ma wypelniac kontrakt z domain/repositories

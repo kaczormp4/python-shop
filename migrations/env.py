@@ -5,13 +5,16 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from shop.infrastructure.orm.base import Base
-
 
 # Import modeli jest wymagany, aby zostały zarejestrowane w Base.metadata
-# from orders import OrderModel
-# from order_items import OrderItemModel
-# from products import ProductModel
+from shop.infrastructure.orm.base import Base
+from shop.infrastructure.orm.orders import OrderModel
+from shop.infrastructure.orm.order_items import OrderItemModel
+from shop.infrastructure.orm.products import ProductModel
+
+target_metadata = Base.metadata
+
+print("TABLES:", list(Base.metadata.tables.keys()))
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -27,7 +30,6 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 
-target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -85,3 +87,6 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
+
+
+print("TABLES:", list(Base.metadata.tables.keys()))
