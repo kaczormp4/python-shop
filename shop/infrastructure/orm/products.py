@@ -21,6 +21,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from shop.domain.entities.products import ProductCategory
 from shop.infrastructure.orm.base import Base
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from shop.infrastructure.orm.order_items import OrderItemModel
 
 # class ProductCategory(StrEnum):
 #     ELECTRONICS = "electronics"

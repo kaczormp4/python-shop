@@ -18,7 +18,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from shop.domain.entities.orders import OrderStatus
 from shop.infrastructure.orm.base import Base
 
-
 # class OrderStatus(StrEnum):
 #     ORDERED = "ordered"
 #     PAID = "paid"

@@ -21,3 +21,9 @@
 
 # stworz obsloge sessji bazy danych poprzez context manager, uzyj "unity of work"
 # repozytoria do napisania shop/infrastructure/repositories - kod ktory ma wypelniac kontrakt z domain/repositories
+
+3 - 20.07
+# zdebugowac odpalanie python3 test.py
+# sprawdzic w bazie czy dodany rekord
+# dodac gitignore dla pythona
+# dopisac pozostale metody w repozytorium ImplProductsRepository

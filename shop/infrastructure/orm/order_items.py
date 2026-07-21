@@ -1,11 +1,17 @@
 import uuid
 
+from shop.infrastructure.orm.orders import OrderModel
 from sqlalchemy import CheckConstraint, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from shop.infrastructure.orm.base import Base
 
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from shop.infrastructure.orm.products import ProductModel
 
 class OrderItemModel(Base):
     __tablename__ = "order_items"
@@ -48,11 +54,11 @@ class OrderItemModel(Base):
         nullable=False,
     )
 
-    order: Mapped["OrderModel"] = relationship(
+    order: Mapped[OrderModel] = relationship(
         back_populates="items",
     )
 
-    product: Mapped["ProductModel"] = relationship(
+    product: Mapped[ProductModel] = relationship(
         back_populates="order_items",
     )
 
