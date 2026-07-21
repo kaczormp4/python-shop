@@ -23,7 +23,7 @@
 # repozytoria do napisania shop/infrastructure/repositories - kod ktory ma wypelniac kontrakt z domain/repositories
 
 3 - 20.07
-# zdebugowac odpalanie python3 test.py
-# sprawdzic w bazie czy dodany rekord
-# dodac gitignore dla pythona
+# zdebugowac odpalanie python3 test.py -> 485acd62b1450ba400d5ab9827111fec93ca39ff
+# sprawdzic w bazie czy dodany rekord -> dziala
+# dodac gitignore dla pythona - done
 # dopisac pozostale metody w repozytorium ImplProductsRepository

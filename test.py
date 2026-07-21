@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from shop.domain.entities.products import ProductCategory
 from shop.infrastructure.dependencies import get_uow
 from shop.infrastructure.repositories.products import ImplProductsRepository
@@ -45,6 +47,37 @@ product1 = ProductModel(
         quantity_stock=12,
     )
 
+
+product2 = ProductModel(
+        name="Mechanical Keyboard",
+        description="Klawiatura mechaniczna z przełącznikami typu tactile.",
+        category=ProductCategory.ELECTRONICS,
+        price=Decimal("499.99"),
+        quantity_stock=40,
+    )
+
 with get_uow() as uow:
     product_repository = ImplProductsRepository(uow)
-    product_repository.create(product1)
+    
+    ## create
+    # product_repository.create(product2)
+    
+    ## get all 
+    # products = product_repository.list()
+    
+    # for product in products:
+    #     print(product)
+
+    ## get by id 
+    # product = product_repository.get_by_id(
+    #     UUID("32a621a9-87a8-4f7c-a5be-0fc1ef4cafcc")
+    # )
+
+    # print(product)
+    
+    ## delete
+    # deleted = product_repository.delete(
+    #     UUID("32a621a9-87a8-4f7c-a5be-0fc1ef4cafcc")
+    # )
+
+    # print("Usunięto:", deleted)
