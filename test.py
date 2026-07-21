@@ -4,7 +4,7 @@ from shop.infrastructure.repositories.products import ImplProductsRepository
 from shop.infrastructure.orm.products import ProductModel
 
 from decimal import Decimal
-
+import shop.infrastructure.orm
 
 products = [
     # ProductModel(
