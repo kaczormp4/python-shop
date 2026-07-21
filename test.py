@@ -1,7 +1,12 @@
+from datetime import datetime, timezone
 from uuid import UUID
 
+from shop.domain.entities.orders import OrderStatus
 from shop.domain.entities.products import ProductCategory
 from shop.infrastructure.dependencies import get_uow
+from shop.infrastructure.orm.order_items import OrderItemModel
+from shop.infrastructure.orm.orders import OrderModel
+from shop.infrastructure.repositories.orders import ImplOrdersRepository
 from shop.infrastructure.repositories.products import ImplProductsRepository
 from shop.infrastructure.orm.products import ProductModel
 
@@ -56,6 +61,7 @@ product2 = ProductModel(
         quantity_stock=40,
     )
 
+
 with get_uow() as uow:
     product_repository = ImplProductsRepository(uow)
     
@@ -81,3 +87,65 @@ with get_uow() as uow:
     # )
 
     # print("Usunięto:", deleted)
+    
+    
+    ### 
+    ### ORDER 
+    ###
+    
+    order_repository = ImplOrdersRepository(uow)
+    PRODUCT_ID: UUID = '78605b46-83b0-4faa-870a-5869880ed62f'
+    
+    ## create 
+    # product = product_repository.get_by_id(PRODUCT_ID)
+
+    # if product is None:
+    #     raise ValueError(f"Product with id={PRODUCT_ID} does not exist")
+
+    # quantity = 2
+
+    # order = OrderModel(
+    #     total_price=product.price * quantity,
+    #     items=[
+    #         OrderItemModel(
+    #             product=product,
+    #             quantity=quantity,
+    #         )
+    #     ],
+    # )
+
+    # created_order = order_repository.create(order)
+
+    # print(created_order)
+    # print(created_order.items)
+    
+    ## get by id 
+    # ordered_by_id = order_repository.get_by_id("38ab386e-32aa-40ae-8887-b224915c6b9e")
+    
+    # print(ordered_by_id)
+    
+    # get list
+    # order_list = order_repository.list()
+    
+    # print(order_list)
+    
+    ## delete
+    # is_deleted = order_repository.delete('id')
+    
+    # print(is_deleted)
+    
+    ## update
+    # updated_order = order_repository.update(
+    #     UUID("38ab386e-32aa-40ae-8887-b224915c6b9e"),
+    #     OrderModel(
+    #         delivery_date=datetime.now(timezone.utc),
+    #         status=OrderStatus.SHIPPED,
+    #         total_price=Decimal("999.98"),
+    #     ),
+    # )
+    
+    # if updated_order is None:
+    #     print("Nie znaleziono zamówienia")
+    # else:
+    #     print("Zaktualizowano:", updated_order)
+    

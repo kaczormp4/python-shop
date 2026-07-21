@@ -1,25 +1,30 @@
 from abc import ABC, abstractmethod
+from uuid import UUID
 
-from shop.domain.entities import Order
+from shop.infrastructure.orm.orders import OrderModel
+
 
 class OrdersRepository(ABC):
-    
     @abstractmethod
-    def create() -> Order:
-        pass
-    
+    def create(self, order: OrderModel) -> OrderModel:
+        raise NotImplementedError
+
     @abstractmethod
-    def get_by_id(id) -> Order:
-        pass
-    
+    def get_by_id(self, order_id: UUID) -> OrderModel | None:
+        raise NotImplementedError
+
     @abstractmethod
-    def list() -> list[Order]:
-        pass
-    
+    def list(self) -> list[OrderModel]:
+        raise NotImplementedError
+
     @abstractmethod
-    def delete() -> None:
-        pass
-    
+    def delete(self, order_id: UUID) -> bool:
+        raise NotImplementedError
+
     @abstractmethod
-    def update() -> None:
-        pass
+    def update(
+        self,
+        order_id: UUID,
+        order: OrderModel,
+    ) -> OrderModel | None:
+        raise NotImplementedError

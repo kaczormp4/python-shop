@@ -25,5 +25,5 @@
 3 - 20.07
 # zdebugowac odpalanie python3 test.py -> 485acd62b1450ba400d5ab9827111fec93ca39ff
 # sprawdzic w bazie czy dodany rekord -> dziala
-# dodac gitignore dla pythona - done
-# dopisac pozostale metody w repozytorium ImplProductsRepository
+# dodac gitignore dla pythona -> done
+# dopisac pozostale metody w repozytorium ImplProductsRepository -> d5d8fbfd87d271ea08670b5327ae315f2bd18653
