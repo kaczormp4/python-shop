@@ -20,10 +20,16 @@
 
 
 # stworz obsloge sessji bazy danych poprzez context manager, uzyj "unity of work"
-# repozytoria do napisania shop/infrastructure/repositories - kod ktory ma wypelniac kontrakt z domain/repositories
 
 3 - 20.07
 # zdebugowac odpalanie python3 test.py -> 485acd62b1450ba400d5ab9827111fec93ca39ff
 # sprawdzic w bazie czy dodany rekord -> dziala
 # dodac gitignore dla pythona -> done
 # dopisac pozostale metody w repozytorium ImplProductsRepository -> d5d8fbfd87d271ea08670b5327ae315f2bd18653
+# repozytoria do napisania shop/infrastructure/repositories - kod ktory ma wypelniac kontrakt z domain/repositories -> ced5659589d65ea8c33f089405b805bc5bd96f38
+
+
+4 - 03.08
+# dodac walidacje w pydantic do shop/domain/entities/products.py -> quantity: int
+# dodac unit testy w pytest dla shop/infrastructure/repositories, wykorzystas sqlite
+# uruchomic ruff check na calym projekcie

@@ -69,10 +69,10 @@ with get_uow() as uow:
     # product_repository.create(product2)
     
     ## get all 
-    # products = product_repository.list()
+    products = product_repository.list()
     
-    # for product in products:
-    #     print(product)
+    for product in products:
+        print(product)
 
     ## get by id 
     # product = product_repository.get_by_id(
