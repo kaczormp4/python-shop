@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+
 from shop.domain.entities import Product
+
 
 class ProductsRepository(ABC):
 

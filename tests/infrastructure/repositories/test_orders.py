@@ -1,15 +1,32 @@
-from datetime import datetime, timezone
+from collections.abc import Generator
+from datetime import UTC, datetime
 from decimal import Decimal
 from uuid import uuid4
 
+import pytest
 from shop.domain.entities.orders import OrderStatus
 from shop.infrastructure.database import UnitOfWork
 from shop.infrastructure.orm.orders import OrderModel
 from shop.infrastructure.repositories.orders import ImplOrdersRepository
 
 
-def test_create_order(uow: UnitOfWork) -> None:
-    repository = ImplOrdersRepository(uow)
+@pytest.fixture
+def repository(uow: UnitOfWork) -> Generator[ImplOrdersRepository, None, None]:
+    return ImplOrdersRepository(uow)
+
+@pytest.fixture
+def create_order(repository):
+    order = OrderModel(
+        total_price=Decimal("100.00"),
+    )
+
+    create_order = repository.create(order)
+    yield create_order
+
+    repository.delete(create_order.id)
+
+def test_create_order(repository) -> None:
+    # breakpoint()
 
     order = OrderModel(
         total_price=Decimal("100.00"),
@@ -21,34 +38,27 @@ def test_create_order(uow: UnitOfWork) -> None:
     assert created_order.total_price == Decimal("100.00")
 
 
-def test_get_order_by_id(uow: UnitOfWork) -> None:
-    repository = ImplOrdersRepository(uow)
+def test_get_order_by_id(repository, create_order) -> None:
 
-    order = OrderModel(
-        total_price=Decimal("200.00"),
-    )
-
-    created_order = repository.create(order)
-
-    found_order = repository.get_by_id(created_order.id)
+    found_order = repository.get_by_id(create_order.id)
 
     assert found_order is not None
-    assert found_order.id == created_order.id
-    assert found_order.total_price == Decimal("200.00")
+    assert found_order.id == create_order.id
+    assert found_order.total_price == Decimal("100.00")
 
 
 def test_get_order_by_id_returns_none_when_order_does_not_exist(
-    uow: UnitOfWork,
+    repository,
 ) -> None:
-    repository = ImplOrdersRepository(uow)
+
 
     result = repository.get_by_id(uuid4())
 
     assert result is None
 
 
-def test_list_orders(uow: UnitOfWork) -> None:
-    repository = ImplOrdersRepository(uow)
+def test_list_orders(repository) -> None:
+
 
     order1 = OrderModel(
         total_price=Decimal("100.00"),
@@ -71,39 +81,25 @@ def test_list_orders(uow: UnitOfWork) -> None:
     assert order2.id in order_ids
 
 
-def test_delete_order(uow: UnitOfWork) -> None:
-    repository = ImplOrdersRepository(uow)
+def test_delete_order(repository,create_order ) -> None:
 
-    order = OrderModel(
-        total_price=Decimal("100.00"),
-    )
-
-    created_order = repository.create(order)
-
-    result = repository.delete(created_order.id)
+    result = repository.delete(create_order.id)
 
     assert result is True
-    assert repository.get_by_id(created_order.id) is None
+    assert repository.get_by_id(create_order.id) is None
 
 
 def test_delete_returns_false_when_order_does_not_exist(
-    uow: UnitOfWork,
+    repository,
 ) -> None:
-    repository = ImplOrdersRepository(uow)
+
 
     result = repository.delete(uuid4())
 
     assert result is False
 
 
-def test_update_order(uow: UnitOfWork) -> None:
-    repository = ImplOrdersRepository(uow)
-
-    order = OrderModel(
-        total_price=Decimal("100.00"),
-    )
-
-    created_order = repository.create(order)
+def test_update_order(repository, create_order) -> None:
 
     delivery_date = datetime.now()
 
@@ -114,7 +110,7 @@ def test_update_order(uow: UnitOfWork) -> None:
     )
 
     updated_order = repository.update(
-        created_order.id,
+        create_order.id,
         order_data,
     )
 
@@ -124,12 +120,12 @@ def test_update_order(uow: UnitOfWork) -> None:
     assert updated_order.delivery_date == delivery_date
 
 def test_update_returns_none_when_order_does_not_exist(
-    uow: UnitOfWork,
+    repository,
 ) -> None:
-    repository = ImplOrdersRepository(uow)
+
 
     order_data = OrderModel(
-        delivery_date=datetime.now(timezone.utc),
+        delivery_date=datetime.now(UTC),
         status=OrderStatus.SHIPPED,
         total_price=Decimal("250.00"),
     )

@@ -1,5 +1,7 @@
-from pydantic import BaseModel
 from enum import Enum
+
+from pydantic import BaseModel
+
 
 class OrderStatus(Enum):
     ORDERED = "ordered"
@@ -7,7 +9,7 @@ class OrderStatus(Enum):
     SHIPPED = "shipped"
     DELIVERED = "delivered"
     CANCELLED = "cancelled"
-        
+
 class Order(BaseModel):
     id: str
     creation_date: str
@@ -15,5 +17,5 @@ class Order(BaseModel):
     items: list
     price: float
     status: OrderStatus
-    
-      
+
+

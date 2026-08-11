@@ -1,17 +1,11 @@
-from datetime import datetime, timezone
+from decimal import Decimal
 from uuid import UUID
 
-from shop.domain.entities.orders import OrderStatus
 from shop.domain.entities.products import ProductCategory
 from shop.infrastructure.dependencies import get_uow
-from shop.infrastructure.orm.order_items import OrderItemModel
-from shop.infrastructure.orm.orders import OrderModel
+from shop.infrastructure.orm.products import ProductModel
 from shop.infrastructure.repositories.orders import ImplOrdersRepository
 from shop.infrastructure.repositories.products import ImplProductsRepository
-from shop.infrastructure.orm.products import ProductModel
-
-from decimal import Decimal
-import shop.infrastructure.orm
 
 products = [
     # ProductModel(
@@ -64,39 +58,39 @@ product2 = ProductModel(
 
 with get_uow() as uow:
     product_repository = ImplProductsRepository(uow)
-    
+
     ## create
     # product_repository.create(product2)
-    
-    ## get all 
+
+    ## get all
     products = product_repository.list()
-    
+
     for product in products:
         print(product)
 
-    ## get by id 
+    ## get by id
     # product = product_repository.get_by_id(
     #     UUID("32a621a9-87a8-4f7c-a5be-0fc1ef4cafcc")
     # )
 
     # print(product)
-    
+
     ## delete
     # deleted = product_repository.delete(
     #     UUID("32a621a9-87a8-4f7c-a5be-0fc1ef4cafcc")
     # )
 
     # print("Usunięto:", deleted)
-    
-    
-    ### 
-    ### ORDER 
+
+
     ###
-    
+    ### ORDER
+    ###
+
     order_repository = ImplOrdersRepository(uow)
-    PRODUCT_ID: UUID = '78605b46-83b0-4faa-870a-5869880ed62f'
-    
-    ## create 
+    PRODUCT_ID: UUID = "78605b46-83b0-4faa-870a-5869880ed62f"
+
+    ## create
     # product = product_repository.get_by_id(PRODUCT_ID)
 
     # if product is None:
@@ -118,22 +112,22 @@ with get_uow() as uow:
 
     # print(created_order)
     # print(created_order.items)
-    
-    ## get by id 
+
+    ## get by id
     # ordered_by_id = order_repository.get_by_id("38ab386e-32aa-40ae-8887-b224915c6b9e")
-    
+
     # print(ordered_by_id)
-    
+
     # get list
     # order_list = order_repository.list()
-    
+
     # print(order_list)
-    
+
     ## delete
     # is_deleted = order_repository.delete('id')
-    
+
     # print(is_deleted)
-    
+
     ## update
     # updated_order = order_repository.update(
     #     UUID("38ab386e-32aa-40ae-8887-b224915c6b9e"),
@@ -143,9 +137,8 @@ with get_uow() as uow:
     #         total_price=Decimal("999.98"),
     #     ),
     # )
-    
+
     # if updated_order is None:
     #     print("Nie znaleziono zamówienia")
     # else:
     #     print("Zaktualizowano:", updated_order)
-    

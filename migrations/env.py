@@ -1,16 +1,10 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
 from alembic import context
-
 
 # Import modeli jest wymagany, aby zostały zarejestrowane w Base.metadata
 from shop.infrastructure.orm.base import Base
-from shop.infrastructure.orm.orders import OrderModel
-from shop.infrastructure.orm.order_items import OrderItemModel
-from shop.infrastructure.orm.products import ProductModel
+from sqlalchemy import engine_from_config, pool
 
 target_metadata = Base.metadata
 
@@ -76,7 +70,7 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection, target_metadata=target_metadata,
         )
 
         with context.begin_transaction():

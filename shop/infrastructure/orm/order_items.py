@@ -1,14 +1,11 @@
 import uuid
+from typing import TYPE_CHECKING
 
+from shop.infrastructure.orm.base import Base
 from shop.infrastructure.orm.orders import OrderModel
 from sqlalchemy import CheckConstraint, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-from shop.infrastructure.orm.base import Base
-
-
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from shop.infrastructure.orm.products import ProductModel

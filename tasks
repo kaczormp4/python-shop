@@ -30,8 +30,18 @@
 
 
 4 - 03.08
-# dodac walidacje w pydantic do shop/domain/entities/products.py -> quantity: int
-# dodac unit testy w pytest dla shop/infrastructure/repositories, wykorzystas sqlite
+# dodac walidacje w pydantic do shop/domain/entities/products.py -> quantity: int DONE
+# dodac unit testy w pytest dla shop/infrastructure/repositories, wykorzystas sqlite DONE
 
-# uruchomic ruff check na calym projekcie
+# uruchomic ruff check na calym projekcie -> python -m ruff check .  DONE 
+
+
+5 - 10.08
 # https://realpython.com/ref/glossary/polymorphism/
+# dodac unit testy w pytest dla shop/infrastructure/repositories/products
+# pytest.paramertize -> poczytac
+# black formatter - obczaic
+# przeanalizowac wykres
+
+
+

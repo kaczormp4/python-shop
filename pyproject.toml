@@ -74,6 +74,7 @@ select = [
   "ARG",  # unused arguments
   "RUF"   # Ruff-specific rules
 ]
+
 ignore = [
   "B008", # FastAPI Depends() in function defaults
   "ARG001"

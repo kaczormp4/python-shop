@@ -1,15 +1,11 @@
 from collections.abc import Generator
 
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
-from sqlalchemy.pool import StaticPool
-
-from shop.infrastructure.database import  UnitOfWork
-
-import shop.infrastructure.orm
+from shop.infrastructure.database import UnitOfWork
 from shop.infrastructure.orm.base import Base
-
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 
 SQLALCHEMY_DATABASE_URL = "sqlite://"
 

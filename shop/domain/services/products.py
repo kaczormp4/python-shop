@@ -19,7 +19,7 @@ class ProductsService:
 
         if product is None:
             raise ValueError(
-                f"Product with id={product_id} does not exist"
+                f"Product with id={product_id} does not exist",
             )
 
         return product
@@ -32,7 +32,7 @@ class ProductsService:
 
         if product is None:
             raise ValueError(
-                f"Product with id={product_id} does not exist"
+                f"Product with id={product_id} does not exist",
             )
 
         self.products_repository.delete(product_id)
@@ -43,12 +43,12 @@ class ProductsService:
         product: Product,
     ) -> Product:
         existing_product = self.products_repository.get_by_id(
-            product_id
+            product_id,
         )
 
         if existing_product is None:
             raise ValueError(
-                f"Product with id={product_id} does not exist"
+                f"Product with id={product_id} does not exist",
             )
 
         self._validate_product(product)
@@ -62,10 +62,10 @@ class ProductsService:
     def _validate_product(product: Product) -> None:
         if product.price <= 0:
             raise ValueError(
-                "Product price must be greater than 0"
+                "Product price must be greater than 0",
             )
 
         if product.quantity < 0:
             raise ValueError(
-                "Product quantity cannot be negative"
+                "Product quantity cannot be negative",
             )

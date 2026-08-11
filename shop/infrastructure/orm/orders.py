@@ -3,8 +3,9 @@
 import uuid
 from datetime import datetime
 from decimal import Decimal
-from enum import StrEnum
 
+from shop.domain.entities.orders import OrderStatus
+from shop.infrastructure.orm.base import Base
 from sqlalchemy import (
     CheckConstraint,
     DateTime,
@@ -14,9 +15,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-from shop.domain.entities.orders import OrderStatus
-from shop.infrastructure.orm.base import Base
 
 # class OrderStatus(StrEnum):
 #     ORDERED = "ordered"
