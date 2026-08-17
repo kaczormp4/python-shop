@@ -10,6 +10,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 if TYPE_CHECKING:
     from shop.infrastructure.orm.products import ProductModel
 
+
 class OrderItemModel(Base):
     __tablename__ = "order_items"
 

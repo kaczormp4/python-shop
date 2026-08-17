@@ -39,21 +39,21 @@ products = [
 ]
 
 product1 = ProductModel(
-        name="MacBook Pro 14",
-        description="Laptop Apple z procesorem M4 Pro, 18 GB RAM i dyskiem 512 GB SSD.",
-        category=ProductCategory.ELECTRONICS,
-        price=Decimal("9999.99"),
-        quantity_stock=12,
-    )
+    name="MacBook Pro 14",
+    description="Laptop Apple z procesorem M4 Pro, 18 GB RAM i dyskiem 512 GB SSD.",
+    category=ProductCategory.ELECTRONICS,
+    price=Decimal("9999.99"),
+    quantity_stock=12,
+)
 
 
 product2 = ProductModel(
-        name="Mechanical Keyboard",
-        description="Klawiatura mechaniczna z przełącznikami typu tactile.",
-        category=ProductCategory.ELECTRONICS,
-        price=Decimal("499.99"),
-        quantity_stock=40,
-    )
+    name="Mechanical Keyboard",
+    description="Klawiatura mechaniczna z przełącznikami typu tactile.",
+    category=ProductCategory.ELECTRONICS,
+    price=Decimal("499.99"),
+    quantity_stock=40,
+)
 
 
 with get_uow() as uow:
@@ -81,7 +81,6 @@ with get_uow() as uow:
     # )
 
     # print("Usunięto:", deleted)
-
 
     ###
     ### ORDER

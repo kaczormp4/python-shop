@@ -59,9 +59,7 @@ class OrderModel(Base):
         Enum(
             OrderStatus,
             name="order_status",
-            values_callable=lambda enum_class: [
-                item.value for item in enum_class
-            ],
+            values_callable=lambda enum_class: [item.value for item in enum_class],
         ),
         nullable=False,
         default=OrderStatus.ORDERED,

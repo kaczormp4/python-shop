@@ -10,6 +10,7 @@ class OrderStatus(Enum):
     DELIVERED = "delivered"
     CANCELLED = "cancelled"
 
+
 class Order(BaseModel):
     id: str
     creation_date: str
@@ -17,5 +18,3 @@ class Order(BaseModel):
     items: list
     price: float
     status: OrderStatus
-
-

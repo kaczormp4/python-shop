@@ -1,3 +1,7 @@
+KOMENDY
+python -m ruff check .
+python -m ruff check . --fix
+
 1 - 06.07
 # encje produktu, 
 # repozytorium produktu, 
@@ -32,12 +36,11 @@
 4 - 03.08
 # dodac walidacje w pydantic do shop/domain/entities/products.py -> quantity: int DONE
 # dodac unit testy w pytest dla shop/infrastructure/repositories, wykorzystas sqlite DONE
-
-# uruchomic ruff check na calym projekcie -> python -m ruff check .  DONE 
+# uruchomic ruff check na calym projekcie -> DONE 
 
 
 5 - 10.08
-# https://realpython.com/ref/glossary/polymorphism/
+# https://realpython.com/ref/glossary/polymorphism/ - przeczytane
 # dodac unit testy w pytest dla shop/infrastructure/repositories/products
 # pytest.paramertize -> poczytac
 # black formatter - obczaic

@@ -31,11 +31,8 @@ class ImplProductsRepository(ProductsRepository):
     def get_by_id(self, product_id: UUID) -> ProductModel | None:
         return self.session.get(ProductModel, product_id)
 
-
     def list(self) -> list[ProductModel]:
-        statement = (
-            select(ProductModel).order_by(ProductModel.created_at.desc())
-        )
+        statement = select(ProductModel).order_by(ProductModel.created_at.desc())
 
         return list(self.session.scalars(statement).all())
 
@@ -50,7 +47,9 @@ class ImplProductsRepository(ProductsRepository):
 
         return True
 
-    def update(self, product_id: UUID, product_data: ProductModel) -> ProductModel | None:
+    def update(
+        self, product_id: UUID, product_data: ProductModel
+    ) -> ProductModel | None:
         product = self.get_by_id(product_id)
 
         if product is None:
@@ -64,4 +63,3 @@ class ImplProductsRepository(ProductsRepository):
 
         self.session.flush()
         self.session.refresh(product)
-
