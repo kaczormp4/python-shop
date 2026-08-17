@@ -1,6 +1,9 @@
 KOMENDY
 python -m ruff check .
 python -m ruff check . --fix
+ruff check . → błędy, importy, style, potencjalne problemy,
+ruff format . → formatowanie kodu,
+black . → głównie formatowanie kodu
 
 1 - 06.07
 # encje produktu, 
@@ -42,8 +45,8 @@ python -m ruff check . --fix
 5 - 10.08
 # https://realpython.com/ref/glossary/polymorphism/ - przeczytane
 # dodac unit testy w pytest dla shop/infrastructure/repositories/products
-# pytest.paramertize -> poczytac
-# black formatter - obczaic
+# pytest.paramertize -> done
+# black formatter - zainstalowane
 # przeanalizowac wykres
 
 
