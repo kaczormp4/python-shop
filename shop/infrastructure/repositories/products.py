@@ -3,6 +3,7 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from shop.domain.entities.products import Product
 from shop.domain.repositories.products import ProductsRepository
 from shop.infrastructure.database import UnitOfWork
 from shop.infrastructure.orm.products import ProductModel
@@ -21,12 +22,28 @@ class ImplProductsRepository(ProductsRepository):
 
         return self.uow.session
 
-    def create(self, product: ProductModel) -> ProductModel:
-        self.session.add(product)
-        self.session.flush()
-        self.session.refresh(product)
+    def create(self, product: Product) -> Product:
+        product_model = ProductModel(
+            name=product.name,
+            description=product.description,
+            category=product.category,
+            price=product.price,
+            quantity_stock=product.quantity_stock,
+        )
 
-        return product
+        self.session.add(product_model)
+        self.session.flush()
+        self.session.refresh(product_model)
+
+        return Product(
+            id=product_model.id,
+            name=product_model.name,
+            description=product_model.description,
+            category=product_model.category,
+            price=float(product_model.price),
+            quantity_stock=product_model.quantity_stock,
+            is_available=product_model.quantity_stock > 0,
+        )
 
     def get_by_id(self, product_id: UUID) -> ProductModel | None:
         return self.session.get(ProductModel, product_id)

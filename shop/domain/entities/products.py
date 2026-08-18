@@ -1,4 +1,5 @@
 from enum import Enum
+from uuid import UUID
 
 from pydantic import BaseModel, Field
 
@@ -12,7 +13,7 @@ class ProductCategory(Enum):
 
 
 class Product(BaseModel):
-    id: str
+    id: UUID | None = None
     name: str
     description: str | None = None
     category: ProductCategory
