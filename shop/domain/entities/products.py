@@ -17,5 +17,5 @@ class Product(BaseModel):
     description: str | None = None
     category: ProductCategory
     price: float
-    quantity: int = Field(ge=0)
+    quantity_stock: int = Field(ge=0)
     is_available: bool = True

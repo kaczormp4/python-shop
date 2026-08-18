@@ -61,11 +61,7 @@ class ProductsService:
     @staticmethod
     def _validate_product(product: Product) -> None:
         if product.price <= 0:
-            raise ValueError(
-                "Product price must be greater than 0",
-            )
+            raise ValueError("Product price must be greater than 0")
 
-        if product.quantity < 0:
-            raise ValueError(
-                "Product quantity cannot be negative",
-            )
+        if product.quantity_stock < 0:
+            raise ValueError("Product quantity cannot be negative")

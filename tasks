@@ -52,7 +52,7 @@ black . → głównie formatowanie kodu
 6 - 17.08
 # pyenv -> zainstalowac i ustawic globalnie py 3.13 - DONE
 # uv -> zainstalowac - DONE
-# dodac unit testy w pytest dla shop/infrastructure/repositories/products
-# relation base accrss control
-# naprawic enpointy
+# dodac unit testy w pytest dla shop/infrastructure/repositories/products - DONE
+# relation base accrss control - przeczytane
+# naprawic endpointy
 # integracyjne testy do niego w pytest
