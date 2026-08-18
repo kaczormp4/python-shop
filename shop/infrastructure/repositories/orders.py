@@ -8,7 +8,6 @@ from sqlalchemy.orm import Session, selectinload
 
 
 class ImplOrdersRepository(OrdersRepository):
-
     def __init__(self, uow: UnitOfWork) -> None:
         self.uow = uow
 

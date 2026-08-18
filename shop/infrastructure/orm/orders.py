@@ -88,10 +88,4 @@ class OrderModel(Base):
     )
 
     def __repr__(self) -> str:
-        return (
-            f"OrderModel("
-            f"id={self.id!r}, "
-            f"status={self.status!r}, "
-            f"total_price={self.total_price!r}"
-            f")"
-        )
+        return f"OrderModel(id={self.id!r}, status={self.status!r}, total_price={self.total_price!r})"

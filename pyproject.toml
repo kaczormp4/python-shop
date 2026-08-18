@@ -50,7 +50,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["app*"]
+include = ["shop*"]
 
 # -------------------------
 # Ruff - linting + formatting

@@ -1,14 +1,14 @@
 from uuid import UUID
 
-from shop.domain.repositories.products import ProductsRepository
-from shop.infrastructure.database import UnitOfWork
-from shop.infrastructure.orm.products import ProductModel
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from shop.domain.repositories.products import ProductsRepository
+from shop.infrastructure.database import UnitOfWork
+from shop.infrastructure.orm.products import ProductModel
+
 
 class ImplProductsRepository(ProductsRepository):
-
     def __init__(self, uow: UnitOfWork) -> None:
         self.uow = uow
 
@@ -47,9 +47,7 @@ class ImplProductsRepository(ProductsRepository):
 
         return True
 
-    def update(
-        self, product_id: UUID, product_data: ProductModel
-    ) -> ProductModel | None:
+    def update(self, product_id: UUID, product_data: ProductModel) -> ProductModel | None:
         product = self.get_by_id(product_id)
 
         if product is None:
@@ -63,3 +61,5 @@ class ImplProductsRepository(ProductsRepository):
 
         self.session.flush()
         self.session.refresh(product)
+
+        return product

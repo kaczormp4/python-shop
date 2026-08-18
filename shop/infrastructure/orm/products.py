@@ -101,10 +101,4 @@ class ProductModel(Base):
     )
 
     def __repr__(self) -> str:
-        return (
-            f"ProductModel("
-            f"id={self.id!r}, "
-            f"name={self.name!r}, "
-            f"category={self.category!r}"
-            f")"
-        )
+        return f"ProductModel(id={self.id!r}, name={self.name!r}, category={self.category!r})"

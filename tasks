@@ -44,10 +44,15 @@ black . → głównie formatowanie kodu
 
 5 - 10.08
 # https://realpython.com/ref/glossary/polymorphism/ - przeczytane
-# dodac unit testy w pytest dla shop/infrastructure/repositories/products
 # pytest.paramertize -> done
 # black formatter - zainstalowane
 # przeanalizowac wykres
 
 
-
+6 - 17.08
+# pyenv -> zainstalowac i ustawic globalnie py 3.13 - DONE
+# uv -> zainstalowac - DONE
+# dodac unit testy w pytest dla shop/infrastructure/repositories/products
+# relation base accrss control
+# naprawic enpointy
+# integracyjne testy do niego w pytest

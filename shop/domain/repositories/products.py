@@ -4,7 +4,6 @@ from shop.domain.entities import Product
 
 
 class ProductsRepository(ABC):
-
     @abstractmethod
     def create(self, product: Product) -> Product:
         pass
