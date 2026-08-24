@@ -5,6 +5,10 @@ ruff check . → błędy, importy, style, potencjalne problemy,
 ruff format . → formatowanie kodu,
 black . → głównie formatowanie kodu
 
+migracja bazy:
+alembic current
+alembic revision --autogenerate -m "add user roles mapping"
+
 1 - 06.07
 # encje produktu, 
 # repozytorium produktu, 
@@ -54,5 +58,14 @@ black . → głównie formatowanie kodu
 # uv -> zainstalowac - DONE
 # dodac unit testy w pytest dla shop/infrastructure/repositories/products - DONE
 # relation base accrss control - przeczytane
-# naprawic endpointy
+# naprawic endpointy - done
 # integracyjne testy do niego w pytest
+
+
+7
+# tabela mapujaca poczytac
+# API:
+# dopisac CRUD do zamowien
+# dopisac CRUD do roles
+# dopisac CRUD do users
+# enpoint do przypisawania rol, i odpisywania
