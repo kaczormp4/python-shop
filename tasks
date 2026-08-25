@@ -62,10 +62,11 @@ alembic revision --autogenerate -m "add user roles mapping"
 # integracyjne testy do niego w pytest
 
 
-7
+7 - 24.08
 # tabela mapujaca poczytac
+# dopisac orders domain/services - DONE
 # API:
-# dopisac CRUD do zamowien
+# dopisac CRUD do orders, - DONE
 # dopisac CRUD do roles
 # dopisac CRUD do users
 # enpoint do przypisawania rol, i odpisywania
