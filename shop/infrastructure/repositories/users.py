@@ -7,7 +7,10 @@ from shop.domain.entities.users import User
 from shop.domain.repositories.users import UsersRepository
 from shop.infrastructure.database import UnitOfWork
 from shop.infrastructure.orm.users import UsersModel
+<<<<<<< HEAD
 from shop.infrastructure.repositories.mappers import to_entity
+=======
+>>>>>>> ccdd905 (h7.2 users)
 
 
 class ImplUsersRepository(UsersRepository):
@@ -32,7 +35,11 @@ class ImplUsersRepository(UsersRepository):
         self.session.flush()
         self.session.refresh(user_model)
 
+<<<<<<< HEAD
         return to_entity(user_model, User)
+=======
+        return self._to_entity(user_model)
+>>>>>>> ccdd905 (h7.2 users)
 
     def get_by_id(
         self,
@@ -47,14 +54,22 @@ class ImplUsersRepository(UsersRepository):
         if user_model is None:
             return None
 
+<<<<<<< HEAD
         return to_entity(user_model, User)
+=======
+        return self._to_entity(user_model)
+>>>>>>> ccdd905 (h7.2 users)
 
     def list(self) -> list[User]:
         statement = select(UsersModel)
 
         user_models = self.session.scalars(statement).all()
 
+<<<<<<< HEAD
         return [to_entity(user_model, User) for user_model in user_models]
+=======
+        return [self._to_entity(user_model) for user_model in user_models]
+>>>>>>> ccdd905 (h7.2 users)
 
     def delete(self, user_id: UUID) -> bool:
         user_model = self.session.get(
@@ -69,3 +84,15 @@ class ImplUsersRepository(UsersRepository):
         self.session.flush()
 
         return True
+<<<<<<< HEAD
+=======
+
+    @staticmethod
+    def _to_entity(user_model: UsersModel) -> User:
+        return User(
+            id=user_model.id,
+            name=user_model.name,
+            surname=user_model.surname,
+            email=user_model.email,
+        )
+>>>>>>> ccdd905 (h7.2 users)

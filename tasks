@@ -68,6 +68,7 @@ alembic revision --autogenerate -m "add user roles mapping"
 # API:
 # dopisac CRUD do orders, - DONE
 <<<<<<< HEAD
+<<<<<<< HEAD
 # dopisac CRUD do roles
 # dopisac CRUD do users
 # enpoint do przypisawania rol, i odpisywania
@@ -95,3 +96,8 @@ alembic revision --autogenerate -m "add user roles mapping"
 =======
 # enpoint do przypisawania rol, i odpisywania - DONE
 >>>>>>> c178274 (h7.3   enpoint do przypisawania rol, i odpisywania)
+=======
+# dopisac CRUD do roles - DONE
+# dopisac CRUD do users - DONE
+# enpoint do przypisawania rol, i odpisywania
+>>>>>>> ccdd905 (h7.2 users)
