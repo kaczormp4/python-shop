@@ -74,6 +74,7 @@ alembic revision --autogenerate -m "add user roles mapping"
 =======
 # dopisac CRUD do roles - DONE
 # dopisac CRUD do users - DONE
+<<<<<<< HEAD
 # enpoint do przypisawania rol, i odpisywania - DONE
 
 8 - 31.08
@@ -91,3 +92,6 @@ alembic revision --autogenerate -m "add user roles mapping"
 # core:
 # usunac def session(self) -> Session:
 >>>>>>> bcacc03 (refactor)
+=======
+# enpoint do przypisawania rol, i odpisywania - DONE
+>>>>>>> c178274 (h7.3   enpoint do przypisawania rol, i odpisywania)
