@@ -32,10 +32,3 @@ class UsersModel(Base):
         nullable=False,
         index=True,
     )
-
-
-# class User(BaseModel):
-#     id: UUID | None = None
-#     name: str
-#     surname: str
-#     email: str
