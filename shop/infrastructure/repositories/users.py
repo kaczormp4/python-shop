@@ -1,7 +1,6 @@
 from uuid import UUID
 
 from sqlalchemy import select
-from sqlalchemy.orm import Session
 
 from shop.domain.entities.users import User
 from shop.domain.repositories.users import UsersRepository
@@ -12,14 +11,7 @@ from shop.infrastructure.repositories.mappers import to_entity
 
 class ImplUsersRepository(UsersRepository):
     def __init__(self, uow: UnitOfWork) -> None:
-        self.uow = uow
-
-    @property
-    def session(self) -> Session:
-        if self.uow.session is None:
-            raise RuntimeError("UnitOfWork session is not initialized")
-
-        return self.uow.session
+        self.session = uow.session
 
     def create(self, user: User) -> User:
         user_model = UsersModel(

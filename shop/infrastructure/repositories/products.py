@@ -1,7 +1,6 @@
 from uuid import UUID
 
 from sqlalchemy import select
-from sqlalchemy.orm import Session
 
 from shop.domain.entities.products import Product
 from shop.domain.repositories.products import ProductsRepository
@@ -11,16 +10,7 @@ from shop.infrastructure.orm.products import ProductModel
 
 class ImplProductsRepository(ProductsRepository):
     def __init__(self, uow: UnitOfWork) -> None:
-        self.uow = uow
-
-    @property
-    def session(self) -> Session:
-        if self.uow.session is None:
-            raise RuntimeError(
-                "UnitOfWork session is not initialized",
-            )
-
-        return self.uow.session
+        self.session = uow.session
 
     def create(self, product: Product) -> Product:
         product_model = ProductModel(

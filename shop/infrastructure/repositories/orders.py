@@ -1,24 +1,16 @@
 from uuid import UUID
 
+from sqlalchemy import select
+from sqlalchemy.orm import selectinload
+
 from shop.domain.repositories.orders import OrdersRepository
 from shop.infrastructure.database import UnitOfWork
 from shop.infrastructure.orm.orders import OrderModel
-from sqlalchemy import select
-from sqlalchemy.orm import Session, selectinload
 
 
 class ImplOrdersRepository(OrdersRepository):
     def __init__(self, uow: UnitOfWork) -> None:
-        self.uow = uow
-
-    @property
-    def session(self) -> Session:
-        if self.uow.session is None:
-            raise RuntimeError(
-                "UnitOfWork session is not initialized."
-                "Use repository inside `with get_uow() as uow:`.",
-            )
-        return self.uow.session
+        self.session = uow.session
 
     def create(self, order: OrderModel) -> OrderModel:
         self.session.add(order)
@@ -56,7 +48,11 @@ class ImplOrdersRepository(OrdersRepository):
 
         return True
 
-    def update(self, order_id: UUID, order_data: OrderModel) -> OrderModel | None:
+    def update(
+        self,
+        order_id: UUID,
+        order_data: OrderModel,
+    ) -> OrderModel | None:
         order = self.get_by_id(order_id)
 
         if order is None:
