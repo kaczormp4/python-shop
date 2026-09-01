@@ -1,7 +1,6 @@
 from uuid import UUID
 
 from sqlalchemy import delete, select
-from sqlalchemy.orm import Session
 
 from shop.domain.entities.roles import UserRole
 from shop.domain.repositories.user_roles import UserRolesRepository
@@ -10,18 +9,12 @@ from shop.infrastructure.orm.roles import RolesModel
 from shop.infrastructure.orm.user_roles_mapping import (
     UserRolesMappingModel,
 )
+from shop.infrastructure.repositories.mappers import to_entity
 
 
 class ImplUserRolesRepository(UserRolesRepository):
     def __init__(self, uow: UnitOfWork) -> None:
-        self.uow = uow
-
-    @property
-    def session(self) -> Session:
-        if self.uow.session is None:
-            raise RuntimeError("UnitOfWork session is not initialized")
-
-        return self.uow.session
+        self.session = uow.session
 
     def assign_role(
         self,
@@ -66,10 +59,4 @@ class ImplUserRolesRepository(UserRolesRepository):
 
         role_models = self.session.scalars(statement).all()
 
-        return [
-            UserRole(
-                id=role_model.id,
-                role=role_model.role,
-            )
-            for role_model in role_models
-        ]
+        return [to_entity(role_model, UserRole) for role_model in role_models]
