@@ -7,6 +7,7 @@ from shop.domain.entities.users import User
 from shop.domain.repositories.users import UsersRepository
 from shop.infrastructure.database import UnitOfWork
 from shop.infrastructure.orm.users import UsersModel
+from shop.infrastructure.repositories.mappers import to_entity
 
 
 class ImplUsersRepository(UsersRepository):
@@ -31,7 +32,7 @@ class ImplUsersRepository(UsersRepository):
         self.session.flush()
         self.session.refresh(user_model)
 
-        return self._to_entity(user_model)
+        return to_entity(user_model, User)
 
     def get_by_id(
         self,
@@ -46,14 +47,14 @@ class ImplUsersRepository(UsersRepository):
         if user_model is None:
             return None
 
-        return self._to_entity(user_model)
+        return to_entity(user_model, User)
 
     def list(self) -> list[User]:
         statement = select(UsersModel)
 
         user_models = self.session.scalars(statement).all()
 
-        return [self._to_entity(user_model) for user_model in user_models]
+        return [to_entity(user_model, User) for user_model in user_models]
 
     def delete(self, user_id: UUID) -> bool:
         user_model = self.session.get(
@@ -68,12 +69,3 @@ class ImplUsersRepository(UsersRepository):
         self.session.flush()
 
         return True
-
-    @staticmethod
-    def _to_entity(user_model: UsersModel) -> User:
-        return User(
-            id=user_model.id,
-            name=user_model.name,
-            surname=user_model.surname,
-            email=user_model.email,
-        )

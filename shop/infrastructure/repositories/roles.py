@@ -7,6 +7,7 @@ from shop.domain.entities.roles import UserRole
 from shop.domain.repositories.roles import RolesRepository
 from shop.infrastructure.database import UnitOfWork
 from shop.infrastructure.orm.roles import RolesModel
+from shop.infrastructure.repositories.mappers import to_entity
 
 
 class ImplRolesRepository(RolesRepository):
@@ -29,7 +30,7 @@ class ImplRolesRepository(RolesRepository):
         self.session.flush()
         self.session.refresh(role_model)
 
-        return self._to_entity(role_model)
+        return to_entity(role_model, UserRole)
 
     def get_by_id(
         self,
@@ -44,21 +45,20 @@ class ImplRolesRepository(RolesRepository):
         if role_model is None:
             return None
 
-        return self._to_entity(role_model)
+        return to_entity(role_model, UserRole)
 
     def list(self) -> list[UserRole]:
         statement = select(RolesModel)
 
         role_models = self.session.scalars(statement).all()
 
-        return [self._to_entity(role_model) for role_model in role_models]
+        return [to_entity(role_model, UserRole) for role_model in role_models]
 
     def delete(self, role_id: UUID) -> bool:
-        statement = select(RolesModel).where(
-            RolesModel.id == role_id,
+        role_model = self.session.get(
+            RolesModel,
+            role_id,
         )
-
-        role_model = self.session.scalar(statement)
 
         if role_model is None:
             return False
@@ -67,10 +67,3 @@ class ImplRolesRepository(RolesRepository):
         self.session.flush()
 
         return True
-
-    @staticmethod
-    def _to_entity(role_model: RolesModel) -> UserRole:
-        return UserRole(
-            id=role_model.id,
-            role=role_model.role,
-        )
