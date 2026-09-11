@@ -4,23 +4,33 @@ from sqlalchemy.orm import Session, sessionmaker
 class UnitOfWork:
     def __init__(self, session_factory: sessionmaker[Session]):
         self._session_factory = session_factory
-        self.session: Session | None = None
+        self._session: Session | None = None
+
+    @property
+    def session(self) -> Session:
+        if self._session is None:
+            raise RuntimeError(
+                "UnitOfWork session is not initialized",
+            )
+
+        return self._session
 
     def __enter__(self) -> "UnitOfWork":
-        self.session = self._session_factory()
+        self._session = self._session_factory()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback) -> bool:
-        if self.session is None:
+        if self._session is None:
             return False
 
         try:
             if exc_type is None:
-                self.session.commit()
+                self._session.commit()
             else:
-                self.session.rollback()
+                self._session.rollback()
         finally:
-            self.session.close()
+            self._session.close()
+            self._session = None
 
         # False oznacza: nie przechwytuj wyjątku,
         # pozwól mu polecieć dalej
