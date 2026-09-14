@@ -32,3 +32,9 @@ class UsersModel(Base):
         nullable=False,
         index=True,
     )
+
+    password: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+        index=True,
+    )

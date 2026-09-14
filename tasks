@@ -8,6 +8,7 @@ black . → głównie formatowanie kodu
 migracja bazy:
 alembic current
 alembic revision --autogenerate -m "add user roles mapping"
+alembic upgrade head
 
 1 - 06.07
 # encje produktu, 
@@ -78,17 +79,19 @@ alembic revision --autogenerate -m "add user roles mapping"
 # enpoint do przypisawania rol, i odpisywania - DONE
 
 8 - 31.08
-# powtorzyc @staticmethod, @classmethod,@property
-# zasada SOLID py
-# pandas libka - zobaczyc 
+# powtorzyc @staticmethod, @classmethod, @property - DONE
+# zasada SOLID py - DONE
+# pandas libka - zobaczyc - DONE
 # cala apke w 1 pliku
 # JWT poczytac
 
 
 # API:
-# walidacja z komentarzy na github
+# walidacja z komentarzy na github - SKIP
 # zaimplementowac login & register (JWT)
 
 # core:
-# usunac def session(self) -> Session:
+# usunac def session(self) -> Session: - DONE
 
+9 - 11.09
+# zobaczyc logike logowania
