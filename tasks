@@ -1,4 +1,5 @@
-KOMENDY
+KOMENDY:
+pip install .
 python -m ruff check .
 python -m ruff check . --fix
 ruff check . → błędy, importy, style, potencjalne problemy,
@@ -95,3 +96,9 @@ alembic upgrade head
 
 9 - 11.09
 # zobaczyc logike logowania
+
+10 - 14.09
+
+- refatkor autoryzacji
+- naprawic JWT
+- przeanalizowac jak sie autoryzuje z JWT, security, jak to dziala

@@ -2,6 +2,7 @@ from uuid import UUID
 
 from shop.domain.entities.users import User
 from shop.domain.repositories.users import UsersRepository
+from shop.infrastructure.security.password import verify_password
 
 
 class UsersService:
@@ -12,6 +13,19 @@ class UsersService:
         self.users_repository = users_repository
 
     def create_user(self, user: User) -> User:
+        existing_user = self.users_repository.get_by_email(
+            user.email,
+        )
+
+        if existing_user is not None:
+            raise ValueError(
+                "User with this email already exists",
+            )
+
+        # user.password = hash_password(
+        #     user.password,
+        # )
+
         return self.users_repository.create(user)
 
     def get_user_by_id(
@@ -36,3 +50,27 @@ class UsersService:
 
         if not deleted:
             raise ValueError(f"User with id={user_id} does not exist")
+
+    def login_user(
+        self,
+        email: str,
+        password: str,
+    ) -> User:
+        user = self.users_repository.get_by_email(
+            email,
+        )
+
+        if user is None:
+            raise ValueError(
+                "Invalid email or password",
+            )
+
+        if not verify_password(
+            password,
+            user.password,
+        ):
+            raise ValueError(
+                "Invalid email or password",
+            )
+
+        return user

@@ -1,6 +1,5 @@
 from uuid import UUID
 
-import bcrypt
 from sqlalchemy import select
 
 from shop.domain.entities.users import User
@@ -8,23 +7,7 @@ from shop.domain.repositories.users import UsersRepository
 from shop.infrastructure.database import UnitOfWork
 from shop.infrastructure.orm.users import UsersModel
 from shop.infrastructure.repositories.mappers import to_entity
-
-
-def hash_password(password: str) -> str:
-    return bcrypt.hashpw(
-        password.encode("utf-8"),
-        bcrypt.gensalt(),
-    ).decode("utf-8")
-
-
-def verify_password(
-    password: str,
-    hashed_password: str,
-) -> bool:
-    return bcrypt.checkpw(
-        password.encode("utf-8"),
-        hashed_password.encode("utf-8"),
-    )
+from shop.infrastructure.security.password import hash_password
 
 
 class ImplUsersRepository(UsersRepository):
@@ -38,8 +21,8 @@ class ImplUsersRepository(UsersRepository):
             )
         )
         if user_from_db is not None:
-            if user.email == user_from_db.email:
-                raise ValueError("user not valid")
+            # if user.email == user_from_db.email:
+            raise ValueError("user not valid")
 
         user_model = UsersModel(
             name=user.name,
@@ -89,3 +72,15 @@ class ImplUsersRepository(UsersRepository):
         self.session.flush()
 
         return True
+
+    def get_by_email(self, email: str) -> User | None:
+        statement = select(UsersModel).where(
+            UsersModel.email == email,
+        )
+
+        user_model = self.session.scalar(statement)
+
+        if user_model is None:
+            return None
+
+        return to_entity(user_model, User)
