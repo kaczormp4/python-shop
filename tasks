@@ -104,9 +104,9 @@ alembic upgrade head
 - przeanalizowac jak sie autoryzuje z JWT, security, jak to dziala
 
 
-11 - 28.08
+11 - 28.09
 - normalizowanie tabel poczytac
 - zfixowac komentarze - DONE
 
-12 -
+12 - 05.10
 - zaimplementowac prosty ACL w endpointach 
