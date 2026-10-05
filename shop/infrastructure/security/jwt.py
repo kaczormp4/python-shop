@@ -7,19 +7,12 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
-def create_access_token(
-    user_id: str,
-    email: str,
-) -> str:
+def create_access_token(user_id: str, email: str, roles: list[str]) -> str:
     expire = datetime.now(UTC) + timedelta(
         minutes=ACCESS_TOKEN_EXPIRE_MINUTES,
     )
 
-    payload = {
-        "sub": user_id,
-        "email": email,
-        "exp": expire,
-    }
+    payload = {"sub": user_id, "email": email, "exp": expire, "roles": roles}
 
     return jwt.encode(
         payload,

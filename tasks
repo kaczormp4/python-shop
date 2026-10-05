@@ -107,3 +107,6 @@ alembic upgrade head
 11 - 28.08
 - normalizowanie tabel poczytac
 - zfixowac komentarze - DONE
+
+12 -
+- zaimplementowac prosty ACL w endpointach 
