@@ -20,3 +20,11 @@ class RolesRepository(ABC):
     @abstractmethod
     def delete(self, role_id: UUID) -> bool:
         raise NotImplementedError
+
+    @abstractmethod
+    def asign_role(self, role_id: UUID, user_id: UUID) -> bool:
+        raise NotImplementedError
+
+    @abstractmethod
+    def unassign_role(self, role_id: UUID, user_id: UUID) -> bool:
+        raise NotImplementedError

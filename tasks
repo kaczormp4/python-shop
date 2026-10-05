@@ -99,6 +99,11 @@ alembic upgrade head
 
 10 - 14.09
 
-- refatkor autoryzacji
-- naprawic JWT
+- refatkor autoryzacji - DONE
+- naprawic JWT - DONE
 - przeanalizowac jak sie autoryzuje z JWT, security, jak to dziala
+
+
+11 - 28.08
+- normalizowanie tabel poczytac
+- zfixowac komentarze - DONE

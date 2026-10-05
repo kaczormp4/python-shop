@@ -1,11 +1,14 @@
 from uuid import UUID
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 
 from shop.domain.entities.roles import UserRole
 from shop.domain.repositories.roles import RolesRepository
 from shop.infrastructure.database import UnitOfWork
 from shop.infrastructure.orm.roles import RolesModel
+from shop.infrastructure.orm.user_roles_mapping import (
+    UserRolesMappingModel,
+)
 from shop.infrastructure.repositories.mappers import to_entity
 
 
@@ -59,3 +62,33 @@ class ImplRolesRepository(RolesRepository):
         self.session.flush()
 
         return True
+
+    def asign_role(
+        self,
+        role_id: UUID,
+        user_id: UUID,
+    ) -> bool:
+        mapping = UserRolesMappingModel(
+            role_id=role_id,
+            user_id=user_id,
+        )
+
+        self.session.add(mapping)
+        self.session.flush()
+
+        return True
+
+    def unassign_role(
+        self,
+        role_id: UUID,
+        user_id: UUID,
+    ) -> bool:
+        statement = delete(UserRolesMappingModel).where(
+            UserRolesMappingModel.role_id == role_id,
+            UserRolesMappingModel.user_id == user_id,
+        )
+
+        result = self.session.execute(statement)
+        self.session.flush()
+
+        return result.rowcount > 0
