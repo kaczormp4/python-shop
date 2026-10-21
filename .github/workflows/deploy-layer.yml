@@ -1,0 +1,62 @@
+name: Deploy Core Lambda Layer
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: eu-north-1
+
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Build Lambda Layer
+        run: |
+          rm -rf layer
+          rm -f shop-core-layer.zip
+
+          mkdir -p layer/python
+
+          pip install . \
+            --target layer/python \
+            --upgrade
+
+      - name: Show Layer content
+        run: |
+          ls -la layer/python
+          du -sh layer/python
+
+      - name: Create Layer ZIP
+        run: |
+          cd layer
+          zip -r ../shop-core-layer.zip python
+
+      - name: Publish Lambda Layer
+        run: |
+          aws lambda publish-layer-version \
+            --layer-name shop-core \
+            --description "Shop core - commit ${{ github.sha }}" \
+            --zip-file fileb://shop-core-layer.zip \
+            --compatible-runtimes python3.14
