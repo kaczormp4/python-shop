@@ -114,3 +114,15 @@ alembic upgrade head
 13 - 12.10
 - wczytac acl z s3 zamias z pliku, konfig w test.py - DONE
 - napisac ci/cd w github actions ktore deployuje core jako lambda layer w aws
+
+14 - 21.10
+- poczytac o lambdzie
+- wgrac kod api do lambdy tak aby konsumowal core ktory jest opublikowany jako lambda layer
+- Lambda IAM S3 jak to sie ze soba laczy
+- amazon RDS - poczytac
+
+15 - 26.10
+Database master username
+postgres
+
+- wdrożyć aplikację FastAPI na AWS Lambda z wykorzystaniem CI/CD

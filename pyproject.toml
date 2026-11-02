@@ -16,7 +16,7 @@ dependencies = [
   # Database
   "sqlalchemy>=2.0.0",
   "alembic>=1.13.0",
-  "psycopg>=3.3.6",
+  "psycopg[binary]>=3.3.6,<4",
 
   # Validation / settings
   "pydantic>=2.8.0",
