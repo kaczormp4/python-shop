@@ -126,3 +126,13 @@ Database master username
 postgres
 
 - wdrożyć aplikację FastAPI na AWS Lambda z wykorzystaniem CI/CD
+
+
+16 - 2.11
+- wykonac alembic upgrade head na bazie danych w AWS, sprobowac w CI/CD po deployou layera jako kolejny job w workflow
+-
+DATABASE_URL = "postgresql://postgres@localhost:5432/shopApp" zastapic zmienna srodowiskowa
+i ta zmienna srodowiskowa, 
+sqlalchemy.url = postgresql://postgres@localhost:5432/shopApp
+i tu tez zmienna srodowiskowa
+

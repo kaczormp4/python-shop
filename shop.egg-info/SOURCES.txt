@@ -41,4 +41,5 @@ shop/infrastructure/repositories/products.py
 shop/infrastructure/repositories/roles.py
 shop/infrastructure/repositories/user_roles.py
 shop/infrastructure/repositories/users.py
+shop/infrastructure/security/jwt.py
 shop/infrastructure/security/password.py

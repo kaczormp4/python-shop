@@ -25,6 +25,11 @@ dependencies = [
   # Auth / security
   "python-jose[cryptography]>=3.3.0,<4",
   "passlib[bcrypt]>=1.7.4",
+
+  # Validation / settings
+  "pydantic>=2.8.0",
+  "pydantic-settings>=2.4.0",
+  "python-dotenv>=1.0.0",
 ]
 
 [project.optional-dependencies]
