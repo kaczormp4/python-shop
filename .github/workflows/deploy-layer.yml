@@ -15,7 +15,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DB_HOST: database-1-instance-1.cri4a8kkuacu.eu-north-1.rds.amazonaws.com
+      DB_PORT: "5432"
+      DB_USER: postgres
+      DB_NAME: shopApp
+      AWS_REGION: eu-north-1
 
     steps:
       - name: Checkout repository
@@ -31,12 +35,57 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install .
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+
+      - name: Generate IAM token and DATABASE_URL
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          AUTH_TOKEN=$(aws rds generate-db-auth-token \
+            --hostname "$DB_HOST" \
+            --port "$DB_PORT" \
+            --username "$DB_USER" \
+            --region "$AWS_REGION")
+
+          export AUTH_TOKEN
+
+          echo "::add-mask::$AUTH_TOKEN"
+
+          python - <<'PY'
+          import os
+          from urllib.parse import quote
+
+          token = os.environ["AUTH_TOKEN"]
+
+          encoded_token = quote(token, safe="")
+
+          database_url = (
+              f"postgresql+psycopg://"
+              f"{os.environ['DB_USER']}:{encoded_token}"
+              f"@{os.environ['DB_HOST']}:{os.environ['DB_PORT']}"
+              f"/{os.environ['DB_NAME']}?sslmode=require"
+          )
+
+          with open(os.environ["GITHUB_ENV"], "a") as file:
+              file.write(f"DATABASE_URL={database_url}\n")
+
+          print("DATABASE_URL configured for Alembic")
+          PY
+
       - name: Validate DATABASE_URL
         run: |
-          if [ -z "$DATABASE_URL" ]; then
+          if [ -z "${DATABASE_URL:-}" ]; then
             echo "::error::DATABASE_URL is not configured"
             exit 1
           fi
+
+          echo "DATABASE_URL configured successfully"
 
       - name: Check current migration
         run: |
@@ -50,7 +99,7 @@ jobs:
         run: |
           python -m alembic current
           python -m alembic check
-
+          
   deploy:
     name: Deploy Lambda Layer
     runs-on: ubuntu-latest
